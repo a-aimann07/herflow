@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar · HerFlow</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%9C%A6%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/calendar.css">
+</head>
+<body>
+
+<div id="topbarRoot"></div>
+
+<div class="app-shell">
+  <div id="sidebarRoot"></div>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Calendar</h1>
+        <p class="page-subtitle">See your tasks and schedule items laid out by month.</p>
+      </div>
+      <button class="btn btn-primary" id="calAddBtn"><i class="fa-solid fa-plus"></i> Add Task</button>
+    </div>
+
+    <div class="calendar-layout">
+      <div class="card calendar-card">
+        <div class="calendar-nav">
+          <button class="btn-icon" id="calPrev" aria-label="Previous month"><i class="fa-solid fa-chevron-left"></i></button>
+          <h2 id="calMonthLabel">Month Year</h2>
+          <button class="btn-icon" id="calNext" aria-label="Next month"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="calendar-weekdays">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div class="calendar-grid" id="calGrid"></div>
+      </div>
+
+      <div class="card calendar-side">
+        <h3 id="calSelectedDateLabel">Today</h3>
+        <div id="calSelectedTasks" class="calendar-day-list"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="bottomNavRoot"></div>
+
+<!-- Add task from calendar modal -->
+<div class="modal-overlay" id="calTaskModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add Task</h3>
+      <button class="modal-close" data-modal-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="calTaskForm">
+      <div class="form-group">
+        <label for="calTaskTitle">Title</label>
+        <input type="text" id="calTaskTitle" required placeholder="e.g. Send invoices">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="calTaskCategory">Category</label>
+          <select id="calTaskCategory"></select>
+        </div>
+        <div class="form-group">
+          <label for="calTaskPriority">Priority</label>
+          <select id="calTaskPriority"><option>Low</option><option selected>Medium</option><option>High</option></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="calTaskDate">Due date</label>
+        <input type="date" id="calTaskDate" required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Add Task</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/calendar.js"></script>
+</body>
+</html>

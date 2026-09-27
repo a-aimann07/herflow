@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasks · HerFlow</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%9C%A6%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/tasks.css">
+</head>
+<body>
+
+<div id="topbarRoot"></div>
+
+<div class="app-shell">
+  <div id="sidebarRoot"></div>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Tasks</h1>
+        <p class="page-subtitle">Everything on your plate, in one place.</p>
+      </div>
+      <button class="btn btn-primary" id="addTaskBtn"><i class="fa-solid fa-plus"></i> Add Task</button>
+    </div>
+
+    <div class="task-toolbar">
+      <div class="tabs" id="taskStatusTabs">
+        <button class="tab-btn active" data-status="All">All <span class="count" id="countAll"></span></button>
+        <button class="tab-btn" data-status="Pending">Pending <span class="count" id="countPending"></span></button>
+        <button class="tab-btn" data-status="In Progress">In Progress <span class="count" id="countInProgress"></span></button>
+        <button class="tab-btn" data-status="Completed">Completed <span class="count" id="countCompleted"></span></button>
+        <button class="tab-btn" data-status="Overdue">Overdue <span class="count" id="countOverdue"></span></button>
+      </div>
+      <div class="task-toolbar-right">
+        <select id="taskCategoryFilter"><option value="All">All Categories</option></select>
+        <input type="search" id="taskSearch" placeholder="Search tasks…">
+      </div>
+    </div>
+
+    <div class="card" style="padding:6px;">
+      <div id="taskList" class="task-list"></div>
+    </div>
+  </main>
+</div>
+
+<div id="bottomNavRoot"></div>
+
+<!-- Add/Edit task modal -->
+<div class="modal-overlay" id="taskModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="taskModalTitle">Add Task</h3>
+      <button class="modal-close" data-modal-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="taskForm">
+      <input type="hidden" id="tskEditId">
+      <div class="form-group">
+        <label for="tskTitle">Title</label>
+        <input type="text" id="tskTitle" required placeholder="e.g. Draft blog outline">
+      </div>
+      <div class="form-group">
+        <label for="tskDescription">Description</label>
+        <textarea id="tskDescription" placeholder="Optional details"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="tskCategory">Category</label>
+          <select id="tskCategory"></select>
+        </div>
+        <div class="form-group">
+          <label for="tskPriority">Priority</label>
+          <select id="tskPriority"><option>Low</option><option selected>Medium</option><option>High</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="tskDueDate">Due date (optional)</label>
+          <input type="date" id="tskDueDate">
+        </div>
+        <div class="form-group">
+          <label for="tskStatus">Status</label>
+          <select id="tskStatus"><option>Pending</option><option>In Progress</option><option>Completed</option></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="tskProject">Project (optional)</label>
+        <select id="tskProject"><option value="">None</option></select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Save Task</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/tasks.js"></script>
+</body>
+</html>

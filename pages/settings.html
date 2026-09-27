@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings · HerFlow</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%9C%A6%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+
+<div id="topbarRoot"></div>
+
+<div class="app-shell">
+  <div id="sidebarRoot"></div>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Settings</h1>
+        <p class="page-subtitle">Tune HerFlow to fit the way you work.</p>
+      </div>
+    </div>
+
+    <div class="settings-stack">
+      <!-- Appearance -->
+      <section class="card settings-section">
+        <h2><i class="fa-solid fa-palette"></i> Appearance</h2>
+        <p class="text-soft settings-desc">Choose the color mode that feels right for you. Saved automatically.</p>
+        <div class="theme-options">
+          <button class="theme-option" data-theme="pink">
+            <span class="theme-swatch" style="background:linear-gradient(135deg,#E85D9E,#D43F85);"></span>
+            Pink Mode
+            <i class="fa-solid fa-circle-check check-icon"></i>
+          </button>
+          <button class="theme-option" data-theme="blue">
+            <span class="theme-swatch" style="background:linear-gradient(135deg,#4C9AFF,#2E7FE0);"></span>
+            Blue Mode
+            <i class="fa-solid fa-circle-check check-icon"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Profile shortcut -->
+      <section class="card settings-section">
+        <h2><i class="fa-solid fa-user"></i> Profile</h2>
+        <p class="text-soft settings-desc">Manage your name, photo and bio from the dedicated Profile page.</p>
+        <a href="profile.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-right"></i> Go to Profile</a>
+      </section>
+
+      <!-- Notifications -->
+      <section class="card settings-section">
+        <h2><i class="fa-solid fa-bell"></i> Notifications</h2>
+        <div class="setting-row">
+          <div>
+            <div class="setting-row-title">Enable reminders</div>
+            <div class="setting-row-desc">Get notified about scheduled items marked with a reminder.</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="toggleReminders">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-row-title">Enable due-date notifications</div>
+            <div class="setting-row-desc">Get notified when tasks are due today, tomorrow, or overdue.</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="toggleDueDates">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Data -->
+      <section class="card settings-section">
+        <h2><i class="fa-solid fa-database"></i> Data</h2>
+        <p class="text-soft settings-desc">These actions cannot be undone. Please proceed carefully.</p>
+        <div class="data-actions">
+          <button class="btn btn-danger" id="clearTasksBtn"><i class="fa-solid fa-trash"></i> Clear All Tasks</button>
+          <button class="btn btn-danger" id="clearProjectsBtn"><i class="fa-solid fa-trash"></i> Clear All Projects</button>
+          <button class="btn btn-danger" id="resetAppBtn"><i class="fa-solid fa-triangle-exclamation"></i> Reset Application</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div id="bottomNavRoot"></div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/settings.js"></script>
+</body>
+</html>

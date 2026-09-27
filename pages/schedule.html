@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule · HerFlow</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%9C%A6%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/schedule.css">
+</head>
+<body>
+
+<div id="topbarRoot"></div>
+
+<div class="app-shell">
+  <div id="sidebarRoot"></div>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Schedule</h1>
+        <p class="page-subtitle">Plan your day, one time block at a time.</p>
+      </div>
+      <button class="btn btn-primary" id="addScheduleBtn"><i class="fa-solid fa-plus"></i> Add Schedule Item</button>
+    </div>
+
+    <div class="schedule-toolbar">
+      <input type="date" id="scheduleDateFilter" aria-label="Filter by date">
+      <div class="tabs" id="scheduleStatusTabs">
+        <button class="tab-btn active" data-status="All">All</button>
+        <button class="tab-btn" data-status="Pending">Pending</button>
+        <button class="tab-btn" data-status="In Progress">In Progress</button>
+        <button class="tab-btn" data-status="Completed">Completed</button>
+      </div>
+    </div>
+
+    <div id="scheduleList" class="schedule-list"></div>
+  </main>
+</div>
+
+<div id="bottomNavRoot"></div>
+
+<!-- Add/Edit schedule modal -->
+<div class="modal-overlay" id="scheduleModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="scheduleModalTitle">Add Schedule Item</h3>
+      <button class="modal-close" data-modal-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="scheduleForm">
+      <input type="hidden" id="schEditId">
+      <div class="form-group">
+        <label for="schTitle">Title</label>
+        <input type="text" id="schTitle" required placeholder="e.g. Design Review">
+      </div>
+      <div class="form-group">
+        <label for="schDescription">Description</label>
+        <textarea id="schDescription" placeholder="Optional details"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="schCategory">Category</label>
+          <select id="schCategory"></select>
+        </div>
+        <div class="form-group">
+          <label for="schProject">Project (optional)</label>
+          <select id="schProject"><option value="">None</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="schDate">Date</label>
+          <input type="date" id="schDate" required>
+        </div>
+        <div class="form-group">
+          <label for="schPriority">Priority</label>
+          <select id="schPriority"><option>Low</option><option selected>Medium</option><option>High</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="schStart">Start time</label>
+          <input type="time" id="schStart" required>
+        </div>
+        <div class="form-group">
+          <label for="schEnd">End time</label>
+          <input type="time" id="schEnd" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="schStatus">Status</label>
+          <select id="schStatus"><option>Pending</option><option>In Progress</option><option>Completed</option></select>
+        </div>
+        <div class="form-group">
+          <label for="schReminder">Reminder</label>
+          <div class="checkbox-row" style="padding-top:8px;">
+            <input type="checkbox" id="schReminder"><span class="hint" style="margin:0;">Notify me on the day</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary" id="scheduleSubmitBtn"><i class="fa-solid fa-check"></i> Save Item</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/schedule.js"></script>
+</body>
+</html>

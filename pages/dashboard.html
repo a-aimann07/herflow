@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overview · HerFlow</title>
+<meta name="description" content="Your HerFlow productivity dashboard.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%9C%A6%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+<div id="topbarRoot"></div>
+
+<div class="app-shell">
+  <div id="sidebarRoot"></div>
+
+  <main class="main-content">
+    <div class="page-header hero">
+      <div>
+        <h1 class="page-title" id="greeting">Good afternoon, Aiman ✨</h1>
+        <p class="page-subtitle" id="currentDate">Loading date…</p>
+      </div>
+      <button class="btn btn-primary" id="quickAddBtn"><i class="fa-solid fa-plus"></i> Quick Add Task</button>
+    </div>
+
+    <!-- Today's Progress -->
+    <section class="card progress-card section-block">
+      <div class="progress-card-top">
+        <div>
+          <h2>Today's Progress</h2>
+          <p class="text-soft" id="progressSub">0 of 0 tasks completed today</p>
+        </div>
+        <div class="progress-percent" id="progressPercent">0%</div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </section>
+
+    <!-- Overview cards -->
+    <section class="section-block">
+      <div class="overview-grid" id="overviewGrid"></div>
+    </section>
+
+    <div class="dashboard-columns">
+      <div class="col-main">
+        <section class="section-block">
+          <div class="section-heading"><h2>Today's Schedule</h2><a href="schedule.html" class="link-all">View all</a></div>
+          <div class="card list-card" id="todaysSchedule"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading"><h2>Recent Tasks</h2><a href="tasks.html" class="link-all">View all</a></div>
+          <div class="card list-card" id="recentTasks"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading"><h2>Projects Progress</h2><a href="projects.html" class="link-all">View all</a></div>
+          <div class="card list-card" id="projectsProgress"></div>
+        </section>
+      </div>
+
+      <div class="col-side">
+        <section class="section-block">
+          <div class="section-heading"><h2>Due Soon</h2></div>
+          <div class="card list-card" id="dueSoon"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading"><h2>Notifications</h2><a href="notifications.html" class="link-all">View all</a></div>
+          <div class="card list-card" id="dashNotifications"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="bottomNavRoot"></div>
+
+<!-- Quick add task modal -->
+<div class="modal-overlay" id="quickAddModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Quick Add Task</h3>
+      <button class="modal-close" data-modal-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="quickAddForm">
+      <div class="form-group">
+        <label for="qaTitle">Title</label>
+        <input type="text" id="qaTitle" required placeholder="e.g. Finish moodboard">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="qaCategory">Category</label>
+          <select id="qaCategory"></select>
+        </div>
+        <div class="form-group">
+          <label for="qaPriority">Priority</label>
+          <select id="qaPriority">
+            <option>Low</option><option selected>Medium</option><option>High</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="qaDueDate">Due date</label>
+        <input type="date" id="qaDueDate">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Add Task</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/dashboard.js"></script>
+</body>
+</html>

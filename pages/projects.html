@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects · HerFlow</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%E2%9C%A6%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/projects.css">
+</head>
+<body>
+
+<div id="topbarRoot"></div>
+
+<div class="app-shell">
+  <div id="sidebarRoot"></div>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Projects</h1>
+        <p class="page-subtitle">Break big goals into manageable tasks.</p>
+      </div>
+      <button class="btn btn-primary" id="addProjectBtn"><i class="fa-solid fa-plus"></i> New Project</button>
+    </div>
+
+    <div class="tabs" id="projectStatusTabs" style="margin-bottom:20px;">
+      <button class="tab-btn active" data-status="All">All</button>
+      <button class="tab-btn" data-status="Planning">Planning</button>
+      <button class="tab-btn" data-status="In Progress">In Progress</button>
+      <button class="tab-btn" data-status="Completed">Completed</button>
+      <button class="tab-btn" data-status="On Hold">On Hold</button>
+    </div>
+
+    <div id="projectsGrid" class="projects-grid"></div>
+  </main>
+</div>
+
+<div id="bottomNavRoot"></div>
+
+<!-- Add/Edit project modal -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="projectModalTitle">New Project</h3>
+      <button class="modal-close" data-modal-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="projectForm">
+      <input type="hidden" id="prjEditId">
+      <div class="form-group">
+        <label for="prjName">Project name</label>
+        <input type="text" id="prjName" required placeholder="e.g. Portfolio Relaunch">
+      </div>
+      <div class="form-group">
+        <label for="prjDescription">Description</label>
+        <textarea id="prjDescription" placeholder="What is this project about?"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prjCategory">Category</label>
+          <select id="prjCategory"></select>
+        </div>
+        <div class="form-group">
+          <label for="prjStatus">Status</label>
+          <select id="prjStatus"><option>Planning</option><option>In Progress</option><option>Completed</option><option>On Hold</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prjStartDate">Start date</label>
+          <input type="date" id="prjStartDate">
+        </div>
+        <div class="form-group">
+          <label for="prjDeadline">Deadline</label>
+          <input type="date" id="prjDeadline">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Save Project</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Project detail modal -->
+<div class="modal-overlay" id="projectDetailModal">
+  <div class="modal" style="max-width:600px;">
+    <div class="modal-header">
+      <h3 id="detailProjectName">Project</h3>
+      <button class="modal-close" data-modal-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="detailProjectMeta" class="detail-meta"></div>
+    <div class="detail-progress-row">
+      <div class="progress-track" style="flex:1;"><div class="progress-fill" id="detailProgressFill"></div></div>
+      <span id="detailProgressPct" class="text-soft" style="font-size:13px;font-weight:700;"></span>
+    </div>
+
+    <div class="detail-tasks-header">
+      <h4>Tasks in this project</h4>
+      <button class="btn btn-secondary btn-sm" id="detailAddTaskBtn"><i class="fa-solid fa-plus"></i> Add Task</button>
+    </div>
+    <div id="detailTaskList" class="detail-task-list"></div>
+
+    <div class="modal-footer" style="justify-content:space-between;">
+      <button class="btn btn-danger" id="detailDeleteProjectBtn"><i class="fa-solid fa-trash"></i> Delete Project</button>
+      <button class="btn btn-secondary" id="detailEditProjectBtn"><i class="fa-solid fa-pen"></i> Edit Details</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add task to project (mini form inside detail) -->
+<div class="modal-overlay" id="projectTaskModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Add Task to Project</h3>
+      <button class="modal-close" data-modal-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="projectTaskForm">
+      <input type="hidden" id="ptProjectId">
+      <div class="form-group">
+        <label for="ptTitle">Title</label>
+        <input type="text" id="ptTitle" required placeholder="e.g. Wireframe homepage">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ptCategory">Category</label>
+          <select id="ptCategory"></select>
+        </div>
+        <div class="form-group">
+          <label for="ptPriority">Priority</label>
+          <select id="ptPriority"><option>Low</option><option selected>Medium</option><option>High</option></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ptDueDate">Due date (optional)</label>
+        <input type="date" id="ptDueDate">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Add Task</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="../js/storage.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/projects.js"></script>
+</body>
+</html>
